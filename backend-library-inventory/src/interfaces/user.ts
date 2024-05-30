@@ -1,5 +1,5 @@
 interface User {
-  id: number;
+  id?: number;
   displayName: string;
   password: string;
   image?: string;
