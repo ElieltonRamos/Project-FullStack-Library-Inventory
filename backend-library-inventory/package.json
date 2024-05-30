@@ -7,7 +7,7 @@
     "test": "test",
     "start": "node build/server.js",
     "dev": "ts-node src/server.ts",
-    "build": "tsc",
+    "build": "tsc --project tsconfig.json",
     "lint": "eslint ./src --ext .ts"
   },
   "keywords": [
@@ -30,7 +30,6 @@
     "eslint-plugin-sonarjs": "^1.0.3",
     "globals": "^15.3.0",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.11.0"
   }
