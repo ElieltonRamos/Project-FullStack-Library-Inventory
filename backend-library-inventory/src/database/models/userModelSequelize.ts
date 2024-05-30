@@ -7,15 +7,15 @@ import {
 } from 'sequelize';
 import db from '.';
 
-class UsersModelSequelize extends Model<InferAttributes<UsersModelSequelize>,
-InferCreationAttributes<UsersModelSequelize>> {
+class UserModelSequelize extends Model<InferAttributes<UserModelSequelize>,
+InferCreationAttributes<UserModelSequelize>> {
   declare id: CreationOptional<number>;
   declare displayName: string;
   declare password: string;
   declare image: CreationOptional<string>;
 }
 
-UsersModelSequelize.init({
+UserModelSequelize.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -39,4 +39,4 @@ UsersModelSequelize.init({
   timestamps: false,
 })
 
-export default UsersModelSequelize;
+export default UserModelSequelize;

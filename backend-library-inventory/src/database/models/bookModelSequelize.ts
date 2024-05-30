@@ -7,8 +7,8 @@ import {
 } from 'sequelize';
 import db from '.';
 
-class UsersModelSequelize extends Model<InferAttributes<UsersModelSequelize>,
-InferCreationAttributes<UsersModelSequelize>> {
+class BookModelSequelize extends Model<InferAttributes<BookModelSequelize>,
+InferCreationAttributes<BookModelSequelize>> {
   declare id: CreationOptional<number>;
   declare title: string;
   declare description: string;
@@ -16,7 +16,7 @@ InferCreationAttributes<UsersModelSequelize>> {
   declare status: string;
 }
 
-UsersModelSequelize.init({
+BookModelSequelize.init({
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -44,4 +44,4 @@ UsersModelSequelize.init({
   timestamps: false,
 })
 
-export default UsersModelSequelize;
+export default BookModelSequelize;
