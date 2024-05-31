@@ -9,7 +9,8 @@ export default {
         autoIncrement: true,
         primaryKey: true,
       },
-      displayName: {
+      userName: {
+        field: 'user_name',
         type: DataTypes.STRING,
         allowNull: false,
       },

@@ -4,7 +4,7 @@ export type NewUser = Omit<User, 'id'>;
 
 interface User {
   id?: number;
-  displayName: string;
+  userName: string;
   password: string;
   image?: string;
 }

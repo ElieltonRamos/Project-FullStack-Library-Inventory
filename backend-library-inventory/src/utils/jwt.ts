@@ -4,7 +4,6 @@ const secretKey = process.env.JWT_SECRET || 'secret';
 
 export interface Payload {
   id: number;
-  displayName: string;
 }
 
 export function generateToken(payload: Payload) {

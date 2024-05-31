@@ -11,8 +11,8 @@ class UserService {
   ) { }
 
   async createUser(user: NewUser): ServiceResponse<Token> {
-    const { password, displayName } = user;
-    const userExists = await this.model.findOne('displayName', displayName);
+    const { password, userName } = user;
+    const userExists = await this.model.findOne('userName', userName);
     if (userExists) return { status: 'conflict', data: { message: 'User already exists' } };
 
     const passwordHash = hashSync(password);
@@ -20,19 +20,19 @@ class UserService {
 
     if (!newUser.id) return { status: 'internalError', data: { message: 'internal server error' } };
 
-    const token = generateToken({ id: newUser.id, displayName });
+    const token = generateToken({ id: newUser.id });
     return { status: 'created', data: { token } };
   }
 
-  async login({ displayName, password }: User): ServiceResponse<Token> {
-    const user = await this.model.findOne('displayName', displayName);
-    if (!user) return { status: 'notFound', data: { message: 'displayName is not registered' } };
+  async login({ userName, password }: User): ServiceResponse<Token> {
+    const user = await this.model.findOne('userName', userName);
+    if (!user) return { status: 'notFound', data: { message: 'userName is not registered' } };
 
     const isValidPassword = compareSync(password, user.password);
-    const errorMessage = 'Invalid displayName or password';
+    const errorMessage = 'Invalid userName or password';
     if (!isValidPassword) return { status: 'unauthorized', data: { message: errorMessage} };
 
-    const payload = { id: user.id as number, displayName };
+    const payload = { id: user.id as number };
 
     const token = generateToken(payload);
     return { status: 'ok', data: { token } };

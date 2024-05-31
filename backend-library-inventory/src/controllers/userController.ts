@@ -9,8 +9,8 @@ class UserController {
 
   async createUser(req: Request, res: Response) {
     try {
-      const { displayName, password } = req.body;
-      const { status, data } = await this.service.createUser({ displayName, password });
+      const { userName, password } = req.body;
+      const { status, data } = await this.service.createUser({ userName, password });
       return res.status(mapStatusHTTP(status)).json(data);
     } catch (error) {
       const erroMsg = error as Error;
@@ -21,8 +21,8 @@ class UserController {
 
   async loginUser(req: Request, res: Response) {
     try {
-      const { displayName, password } = req.body;
-      const { status, data } = await this.service.login({ displayName, password });
+      const { userName, password } = req.body;
+      const { status, data } = await this.service.login({ userName, password });
       return res.status(mapStatusHTTP(status)).json(data);
     } catch (error) {
       const erroMsg = error as Error;
