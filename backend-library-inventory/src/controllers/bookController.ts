@@ -41,6 +41,19 @@ class BookController {
       return res.status(500).json({ message: this.internalErrorMsg });
     }
   }
+
+  async updateBook(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const book = req.body;
+      const { status, data } = await this.service.updateBook(Number(id), book);
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      const erroMsg = error as Error;
+      console.log('Error in updateBook', erroMsg.message);
+      return res.status(500).json({ message: this.internalErrorMsg });
+    }
+  }
 }
 
 export default BookController;

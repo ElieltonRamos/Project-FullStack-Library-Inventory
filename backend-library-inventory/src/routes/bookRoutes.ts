@@ -29,4 +29,10 @@ bookRoutes.get(
   (req: Request, res: Response) => bookController.findBookId(req, res)
 );
 
+bookRoutes.put(
+  '/:id',
+  validateToken,
+  (req: Request, res: Response) => bookController.updateBook(req, res)
+);
+
 export default bookRoutes;
