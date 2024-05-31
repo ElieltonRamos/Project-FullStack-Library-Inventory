@@ -4,6 +4,7 @@ import { ServiceResponse } from '../interfaces/responses';
 
 class BookService {
   private internalError = 'internal server error';
+  private msgInvalidId = 'Invalid bookId';
   constructor(private model: databaseModel<Book>) { }
 
   async createBook(book: Book): ServiceResponse<Book> {
@@ -24,7 +25,7 @@ class BookService {
   }
 
   async findBookId(id: number): ServiceResponse<Book> {
-    if (isNaN(id)) return { status: 'badRequest', data: { message: 'Invalid bookId' } };
+    if (isNaN(id)) return { status: 'badRequest', data: { message: this.msgInvalidId } };
     const book = await this.model.findById(id);
     if (!book) return { status: 'notFound', data: { message: 'Book not found' } };
 
@@ -32,7 +33,7 @@ class BookService {
   }
 
   async updateBook(bookId: number, book: Book): ServiceResponse<Book> {
-    if (isNaN(bookId)) return { status: 'badRequest', data: { message: 'Invalid bookId' } };
+    if (isNaN(bookId)) return { status: 'badRequest', data: { message: this.msgInvalidId } };
     const bookExists = await this.model.findOne('id', bookId);
     if (!bookExists) return { status: 'notFound', data: { message: 'Book not found' } };
 
@@ -47,6 +48,16 @@ class BookService {
     if (updated === 0) return { status: 'internalError', data: { message: this.internalError } };
 
     return { status: 'ok', data: updatedBook };
+  }
+
+  async deleteBook(bookId: number): ServiceResponse<Book> {
+    if (isNaN(bookId)) return { status: 'badRequest', data: { message: this.msgInvalidId} };
+
+    await this.model.delete(bookId);
+    const bookDeleted = await this.model.findById(bookId);
+    if (bookDeleted) return { status: 'internalError', data: { message: this.internalError } };
+
+    return { status: 'ok', data: { message: 'Book deleted' } };
   }
 }
 
