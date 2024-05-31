@@ -6,8 +6,15 @@
   "scripts": {
     "test": "test",
     "start": "node build/server.js",
+    "prestart": "npm run build",
     "dev": "ts-node src/server.ts",
+    "predev": "npm run db:reset",
     "build": "tsc --project tsconfig.json",
+    "db:create": "npx sequelize-cli db:create",
+    "db:drop": "npx sequelize-cli db:drop",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "db:seed": "npx sequelize-cli db:seed:all",
+    "db:reset": "npm run db:drop && npm run db:create && npm run db:migrate && npm run db:seed",
     "lint": "eslint ./src --ext .ts"
   },
   "keywords": [
