@@ -11,7 +11,10 @@ class BookModel implements databaseModel<Book> {
   }
 
   async findAll(): Promise<Book[]> {
-    const responseDB = await this.model.findAll();
+    const responseDB = await this.model.findAll({
+      attributes: { exclude: ['description']},
+      order: [['id', 'DESC']]
+    });
     const allBooks = responseDB.map((book) => book.dataValues);
     return allBooks;
   }
