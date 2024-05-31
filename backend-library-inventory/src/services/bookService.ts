@@ -16,6 +16,11 @@ class BookService {
 
     return { status: 'created', data: newBook };
   }
+
+  async listAllBooks(): ServiceResponse<Book[]> {
+    const books = await this.model.findAll();
+    return { status: 'ok', data: books };
+  }
 }
 
 export default BookService;

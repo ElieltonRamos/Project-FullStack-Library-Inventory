@@ -7,7 +7,7 @@
     "test": "test",
     "start": "node build/server.js",
     "prestart": "npm run build",
-    "dev": "ts-node src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "predev": "npm run db:reset",
     "build": "tsc --project tsconfig.json",
     "db:create": "npx sequelize-cli db:create",
@@ -45,6 +45,7 @@
     "eslint-plugin-sonarjs": "^1.0.3",
     "globals": "^15.3.0",
     "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.11.0"
   }

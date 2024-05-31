@@ -17,4 +17,10 @@ bookRoutes.post(
   validateBook,
   (req: Request, res: Response) => bookController.createBook(req, res));
 
+bookRoutes.get(
+  '/',
+  validateToken,
+  (req: Request, res: Response) => bookController.listAllBooks(req, res)
+);
+
 export default bookRoutes;

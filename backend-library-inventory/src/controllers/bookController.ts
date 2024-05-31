@@ -18,6 +18,17 @@ class BookController {
       return res.status(500).json({ message: this.internalErrorMsg });
     }
   }
+
+  async listAllBooks(req: Request, res: Response) {
+    try {
+      const { status, data } = await this.service.listAllBooks();
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      const erroMsg = error as Error;
+      console.log('Error in listAllBooks', erroMsg.message);
+      return res.status(500).json({ message: this.internalErrorMsg });
+    }
+  }
 }
 
 export default BookController;
