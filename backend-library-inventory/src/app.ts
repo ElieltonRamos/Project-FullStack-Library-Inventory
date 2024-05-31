@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import loginRoutes from './routes/loginRoutes';
+import userRoutes from './routes/userRoutes';
 
 const app = express();
 
@@ -11,6 +11,6 @@ app.get('/', (_req, res) => {
   res.status(200).send({ message: 'backend is running!'});
 });
 
-app.use('/login', loginRoutes);
+app.use('/user', userRoutes);
 
 export default app;
