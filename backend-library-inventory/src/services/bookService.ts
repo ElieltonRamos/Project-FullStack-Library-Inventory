@@ -21,6 +21,13 @@ class BookService {
     const books = await this.model.findAll();
     return { status: 'ok', data: books };
   }
+
+  async findBookId(id: number): ServiceResponse<Book> {
+    const book = await this.model.findOne('id', id);
+    if (!book) return { status: 'notFound', data: { message: 'Book not found' } };
+
+    return { status: 'ok', data: book };
+  }
 }
 
 export default BookService;

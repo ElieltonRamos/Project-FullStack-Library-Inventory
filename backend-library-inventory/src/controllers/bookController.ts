@@ -29,6 +29,18 @@ class BookController {
       return res.status(500).json({ message: this.internalErrorMsg });
     }
   }
+
+  async findBookId(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { status, data } = await this.service.findBookId(Number(id));
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      const erroMsg = error as Error;
+      console.log('Error in findBookId', erroMsg.message);
+      return res.status(500).json({ message: this.internalErrorMsg });
+    }
+  }
 }
 
 export default BookController;

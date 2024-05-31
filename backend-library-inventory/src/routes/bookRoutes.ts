@@ -23,4 +23,10 @@ bookRoutes.get(
   (req: Request, res: Response) => bookController.listAllBooks(req, res)
 );
 
+bookRoutes.get(
+  '/:id',
+  validateToken,
+  (req: Request, res: Response) => bookController.findBookId(req, res)
+);
+
 export default bookRoutes;
