@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import UserController from '../controllers/userController';
-import UserService from '../services/UserService';
+import UserService from '../services/userService';
 import UserModel from '../models/userModel';
 import { validateUser } from '../middlewares/validateUser';
 
