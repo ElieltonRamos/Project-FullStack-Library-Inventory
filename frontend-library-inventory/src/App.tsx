@@ -1,9 +1,18 @@
+import { Route, Routes } from "react-router-dom"
+import Login from "./pages/Login"
+import Home from "./pages/Home"
+import Book from "./pages/Book"
+import NotFound from "./pages/NotFound"
+
 function App() {
 
   return (
-    <main>
-      <h1 className="text-red-800">Frontend library inventory</h1>
-    </main>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/books" element={<Home />} />
+      <Route path="/books/:id" element={<Book />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   )
 }
 
