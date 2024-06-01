@@ -1,0 +1,29 @@
+import { CreateBook } from "../types/book";
+import { CreateUser, Token } from "../types/user";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:3001';
+const ERROR_NETWORK = 'Oops, looks like we had a little server problem. Please try again later!';
+type Response<t> =  t | { message: string };
+
+const configFetch = (method: string, body: CreateUser | CreateBook) => {
+  return {
+    method,
+    body: JSON.stringify(body),
+    headers: new Headers({ 'Content-Type': 'application/json' })
+  };
+};
+
+export async function requestLogin(newUser: CreateUser): Promise<Response<Token>> {
+  try {
+    const config = configFetch('POST', newUser);
+    const patch = `${BASE_URL}/user/login`;
+
+    const response = await fetch(patch, config);
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    console.log('Error in requestLogin:', error);
+    return { message: ERROR_NETWORK };
+  }
+}

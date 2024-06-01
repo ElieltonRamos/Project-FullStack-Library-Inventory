@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoadingSmall from "../components/LoadingSmall";
 import { handleChange } from "../services/eventsHandles";
+import { requestLogin } from "../services/requests";
 
 function Login() {
   const navigate = useNavigate();
@@ -11,6 +12,13 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    const response = await requestLogin(form);
+    setLoading(false);
+    if ('message' in response) return setErrorMsg(response.message);
+    localStorage.setItem('token', response.token);
+    setErrorMsg('');
+    navigate('/books');
   }
 
   return (
@@ -49,7 +57,7 @@ function Login() {
         >
           {loading ? <LoadingSmall /> : 'Login'}
         </button>
-        <p className="text-red font-light text-sm mt-2">{errorMsg}</p>
+        <p className="text-red-600 font-light text-sm mt-2">{errorMsg}</p>
 
         <hr className="w-full my-4 border-5" />
 

@@ -8,3 +8,7 @@ export default interface User {
 export type CreateUser = Omit<User, 'id'>;
 
 export type LoggedUser = Omit<User, 'password'>;
+
+export type Token = {
+  token: string;
+}
