@@ -51,7 +51,7 @@ function Login() {
         />
 
         <button
-          className="h-12 w-full bg-blue-600 rounded-md text-white"
+          className="button h-12 w-full bg-blue-600 text-white"
           type="submit"
           disabled={loading}
         >
@@ -63,7 +63,7 @@ function Login() {
 
         <button
           onClick={() => navigate('/register')}
-          className="bg-green-600 rounded-md text-white px-5 h-12"
+          className="button bg-green-600 text-white px-5 h-12"
           type="button"
         >
           Create New Account

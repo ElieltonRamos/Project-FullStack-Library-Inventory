@@ -13,9 +13,9 @@ const configFetch = (method: string, body: CreateUser | CreateBook) => {
   };
 };
 
-export async function requestLogin(newUser: CreateUser): Promise<Response<Token>> {
+export async function requestLogin(user: CreateUser): Promise<Response<Token>> {
   try {
-    const config = configFetch('POST', newUser);
+    const config = configFetch('POST', user);
     const patch = `${BASE_URL}/user/login`;
 
     const response = await fetch(patch, config);
@@ -24,6 +24,21 @@ export async function requestLogin(newUser: CreateUser): Promise<Response<Token>
     return data;
   } catch (error) {
     console.log('Error in requestLogin:', error);
+    return { message: ERROR_NETWORK };
+  }
+}
+
+export async function requestRegisterUser(newUser: CreateUser): Promise<Response<Token>> {
+  try {
+    const config = configFetch('POST', newUser);
+    const patch = `${BASE_URL}/user`;
+
+    const response = await fetch(patch, config);
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    console.log('Error in requestRegisterUser:', error);
     return { message: ERROR_NETWORK };
   }
 }
