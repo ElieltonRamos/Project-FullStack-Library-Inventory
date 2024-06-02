@@ -61,7 +61,7 @@ export async function requestBooks(): Promise<Response<Book[]>> {
   }
 }
 
-export async function requestBook(id: number): Promise<Response<Book>> {
+export async function requestBook(id: string): Promise<Response<Book>> {
   try {
     const config = configFetch('GET');
     const patch = `${BASE_URL}/book/${id}`;
