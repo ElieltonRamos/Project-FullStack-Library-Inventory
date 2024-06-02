@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
-import Book from "./pages/Book"
+import BookPage from "./pages/BookPage"
 import NotFound from "./pages/NotFound"
 import Register from "./pages/Register"
 
@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/books" element={<Home />} />
-      <Route path="/books/:id" element={<Book />} />
+      <Route path="/books/:id" element={<BookPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

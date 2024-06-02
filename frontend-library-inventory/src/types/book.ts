@@ -1,11 +1,12 @@
+import { LoggedUser } from "./user";
+
 export default interface Book {
   id: number;
   title: string;
   description: string;
   image?: string;
-  status: StatusBook;
+  status: string;
+  CheckoutUser?: LoggedUser;
 }
-
-export type StatusBook = 'Avaliable' | 'Checkout'
 
 export type CreateBook = Omit<Book, 'id'>;
