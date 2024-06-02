@@ -1,40 +1,44 @@
-import Book from "../types/book";
+import BookType from "../types/book";
+import Book from "./Book";
 
 type PropsBookInfo = {
-  book: Book;
+  book: BookType;
 };
 
 function BookInfo({ book }: PropsBookInfo) {
-  const { title, status, description, image, CheckoutUser } = book;
+  const { description, CheckoutUser, status } = book;
 
-  const classStatusBook = status === "Available" ? "bg-green-500" : "bg-red-500";
-  const borrowed = CheckoutUser?.userName === undefined ? null 
-    : <p className="text-sm text-white font-bold p-1 bg-gray-500 rounded-lg text-center">Borrowed by: {CheckoutUser?.userName}</p>
+  const borrowed = CheckoutUser?.userName === undefined ? null
+    : <p className="text-sm text-white font-bold p-1 bg-gray-500 rounded-lg text-center">
+      Borrowed by: {CheckoutUser?.userName}</p>;
+
+  const borrow = () => {
+    alert("Borrowed");
+  };
 
   return (
-    <article className="flex flex-col justify-center items-center p-5 bg-white w-3/4 shadow-sm rounded-md mb-5">
+    <div className="flex flex-col justify-center items-center p-5 bg-white w-3/4 shadow-lg rounded-md mb-5">
 
-      <h1 className="text-xl text-gray-800 font-bold">{title}</h1>
+      <Book book={book} />
 
       <p className="text-sm text-gray-800">{description}</p>
 
-      <img src={image} alt="image-book" className="h-80 w-64" />
-
       <div className="flex justify-center gap-2 w-full mt-2">
-        <p className={`text-sm text-white text-center font-bold p-1 bg-green-500 rounded-lg ${classStatusBook}`}>{status}</p>
 
         {borrowed}
 
-        {status === "Available" ?
+        {status === "available" ?
           <button
+            onClick={borrow}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded-lg">
             Borrow
           </button>
-          : null}
+          : null
+        }
 
       </div>
 
-    </article>
+    </div>
   );
 }
 
