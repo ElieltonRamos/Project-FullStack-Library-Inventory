@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar";
 
 function Home() {
   return (
-    <main className="w-screen h-screen bg-brown_100 flex flex-col">
+    <main className="w-screen h-screen bg-brown_100 flex flex-col overflow-auto">
 
       <NavBar />
 
