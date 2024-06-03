@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import BookType from "../types/book";
 import Book from "./Book";
 
@@ -6,7 +7,12 @@ type PropsBookInfo = {
 };
 
 function BookInfo({ book }: PropsBookInfo) {
+  const navigate = useNavigate();
   const { description, CheckoutUser, status } = book;
+
+  const deleteBook = (id: number) => {
+    navigate('/book')
+  };
 
   const borrowed = CheckoutUser?.userName === undefined ? null
     : <p className="text-sm text-white font-bold p-1 bg-gray-500 rounded-lg text-center">
@@ -30,11 +36,17 @@ function BookInfo({ book }: PropsBookInfo) {
         {status === "available" ?
           <button
             onClick={borrow}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded-lg">
+            className="bg-blue-500 h-full hover:bg-blue-700 text-white font-bold p-1 rounded-lg">
             Borrow
           </button>
           : null
         }
+
+        <button
+          onClick={() => deleteBook(book.id)}
+          className="button bg-red-700 text-white h-full hover:bg-red-800 mt-[-1px]">
+            Delete book
+        </button>
 
       </div>
 
