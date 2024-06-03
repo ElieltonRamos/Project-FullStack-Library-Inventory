@@ -13,7 +13,7 @@ function Book({ book, detailsView }: PropsBook) {
   const classStatusBook = status === "available" ? "bg-green-500" : "bg-red-500";
 
   return (
-    <article className="flex flex-col justify-center items-center p-5 bg-white shadow-lg rounded-md">
+    <article className="min-w-64 flex flex-col justify-center items-center p-5 bg-white shadow-lg rounded-md">
 
       <h1 className="text-xl text-gray-800 font-bold">{title}</h1>
 

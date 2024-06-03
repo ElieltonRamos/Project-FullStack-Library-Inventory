@@ -3,6 +3,7 @@ import NavBar from "../components/NavBar";
 import BookType from "../types/book";
 import Book from "../components/Book";
 import { MsgBackend, requestBooks } from "../services/requests";
+import CreateBook from "../components/CreateBook";
 
 function Home() {
   const [books, setBooks] = useState<BookType[] | MsgBackend>({ message: '' });
@@ -18,7 +19,8 @@ function Home() {
 
       <NavBar />
 
-      <section className="justify-center items-center bg-gray-100 rounded-lg shadow mt-10 w-3/4">
+      <section className="justify-center items-center bg-gray-100 rounded-lg shadow mt-10 w-3/4 min-w-64">
+        <CreateBook />
         {'message' in books
           ? noBooks
           : books.map((book) => <Book key={book.id} book={book} detailsView={true} />

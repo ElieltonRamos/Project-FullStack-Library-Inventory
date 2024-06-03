@@ -12,6 +12,6 @@ interface Book {
   bookBorrowedUser?: LoggedUser;
 }
 
-export type CreateBook = Omit<Book, 'id'>;
+export type CreateBook = Omit<Book, 'id' | 'status' | 'checkoutUser' |  'bookBorrowedUser'>;
 
 export default Book;
