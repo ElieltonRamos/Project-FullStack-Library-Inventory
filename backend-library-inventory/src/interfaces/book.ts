@@ -4,6 +4,7 @@ interface Book {
   description: string;
   image: string;
   status: string;
+  checkoutUser?: { id: number; userName?: string; image?: string};
 }
 
 export type NewBook = Omit<Book, 'id'>;

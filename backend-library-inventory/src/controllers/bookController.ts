@@ -55,6 +55,19 @@ class BookController {
     }
   }
 
+  async updateBookStatus(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { user } = req.body;
+      const { status, data } = await this.service.updateBookStatus(Number(id), Number(user.id));
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      const erroMsg = error as Error;
+      console.log('Error in updateBookStatus', erroMsg.message);
+      return res.status(500).json({ message: this.internalErrorMsg });
+    }
+  }
+
   async deleteBook(req: Request, res: Response) {
     try {
       const { id } = req.params;

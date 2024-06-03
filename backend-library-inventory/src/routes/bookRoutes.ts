@@ -41,4 +41,10 @@ bookRoutes.delete(
   (req: Request, res: Response) => bookController.deleteBook(req, res)
 );
 
+bookRoutes.patch(
+  '/:id/status',
+  validateToken,
+  (req: Request, res: Response) => bookController.updateBookStatus(req, res)
+);
+
 export default bookRoutes;
