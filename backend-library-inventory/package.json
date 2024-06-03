@@ -8,7 +8,7 @@
     "start": "node build/server.js",
     "prestart": "npm run build",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "predev": "npm run db:reset",
+    "predev": "npm run build && npm run db:reset",
     "build": "tsc --project tsconfig.json",
     "db:create": "npx sequelize-cli db:create",
     "db:drop": "npx sequelize-cli db:drop",
