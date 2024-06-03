@@ -18,7 +18,7 @@ function Login() {
     if ('message' in response) return setErrorMsg(response.message);
     localStorage.setItem('token', response.token);
     setErrorMsg('');
-    navigate('/books');
+    navigate('/book');
   }
 
   return (
