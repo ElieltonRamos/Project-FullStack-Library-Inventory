@@ -116,10 +116,10 @@ I used TypeScript to develop the application because it is a typed and high-leve
 ## Usage
 
 <p align="center">
-  <img src="./images-readme/page-login.png" alt="page login" width="300px">
-  <img src="./images-readme/page-book-id.png" alt="page book id" width="300px">
-  <img src="./images-readme/page-all-books.png" alt="page books" width="300px">
-  <img src="./images-readme//page-register.png" alt="page register" width="300px">
+  <img src="../public/page-login.png" alt="page login" width="300px">
+  <img src="../public/page-book-id.png" alt="page book id" width="300px">
+  <img src="../public/page-all-books.png" alt="page books" width="300px">
+  <img src="../public//page-register.png" alt="page register" width="300px">
 </p>
 
 
