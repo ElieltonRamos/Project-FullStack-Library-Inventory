@@ -3,12 +3,12 @@ import BookInfo from "../components/BookInfo"
 import NavBar from "../components/NavBar"
 import { useEffect, useState } from "react";
 import Book from "../types/book";
-import { requestBook } from "../services/requests";
+import { MsgBackend, requestBook } from "../services/requests";
 import BookNotFound from "../components/BookNotFound";
 
 function BookPage() {
   const { id } = useParams();
-  const [book, setBook] = useState<Book | { message: string }>({ message: '' });
+  const [book, setBook] = useState<Book | MsgBackend>({ message: '' });
 
   useEffect(() => {
     requestBook(id as string)

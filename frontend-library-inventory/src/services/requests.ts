@@ -3,7 +3,7 @@ import { CreateUser, Token } from "../types/user";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL || 'http://localhost:3001';
 const ERROR_NETWORK = 'Oops, looks like we had a little server problem. Please try again later!';
-type MsgBackend = { message: string };
+export type MsgBackend = { message: string };
 type Response<t> =  t | MsgBackend;
 
 const configFetch = (method: string, body?: CreateUser | CreateBook) => {
@@ -107,10 +107,10 @@ export async function requestDeleteBook(id: number): Promise<Response<MsgBackend
   }
 }
 
-export async function requestUpdateStatusBook(id: number): Promise<Response<MsgBackend>> {
+export async function requestBorrowBook(id: number): Promise<Response<MsgBackend>> {
   try {
     const config = configFetch('PATCH');
-    const patch = `${BASE_URL}/book/${id}/status`;
+    const patch = `${BASE_URL}/book/${id}/borrow`;
 
     const response = await fetch(patch, config);
     const data = await response.json();
@@ -118,6 +118,21 @@ export async function requestUpdateStatusBook(id: number): Promise<Response<MsgB
     return data;
   } catch (error) {
     console.log('Error in requestBorrowBook:', error);
+    return { message: ERROR_NETWORK };
+  }
+}
+
+export async function requestGiveBackBook(id: number): Promise<Response<MsgBackend>> {
+  try {
+    const config = configFetch('PATCH');
+    const patch = `${BASE_URL}/book/${id}/giveback`;
+
+    const response = await fetch(patch, config);
+    const data = await response.json();
+    
+    return data;
+  } catch (error) {
+    console.log('Error in requestGiveBackBook:', error);
     return { message: ERROR_NETWORK };
   }
 }

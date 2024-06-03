@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import BookType from "../types/book";
 import Book from "../components/Book";
-import { requestBooks } from "../services/requests";
+import { MsgBackend, requestBooks } from "../services/requests";
 
 function Home() {
-  const [books, setBooks] = useState<BookType[] | { message: string }>({ message: '' });
+  const [books, setBooks] = useState<BookType[] | MsgBackend>({ message: '' });
 
   useEffect(() => {
     requestBooks().then((response) => setBooks(response));

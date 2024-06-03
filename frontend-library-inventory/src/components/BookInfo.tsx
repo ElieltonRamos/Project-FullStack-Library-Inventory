@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import BookType from "../types/book";
 import Book from "./Book";
+import { requestBorrowBook, requestDeleteBook } from "../services/requests";
+import { useState } from "react";
 
 type PropsBookInfo = {
   book: BookType;
@@ -8,18 +10,22 @@ type PropsBookInfo = {
 
 function BookInfo({ book }: PropsBookInfo) {
   const navigate = useNavigate();
-  const { description, checkoutUser, status } = book;
+  const [msg, setMsg] = useState<string | null>(null);
+  const { description, bookBorrowedUser, status } = book;
 
-  const deleteBook = (id: number) => {
+  const deleteBook = async (id: number) => {
+    await requestDeleteBook(id);
     navigate('/book')
   };
 
-  const borrowed = checkoutUser?.userName === undefined ? null
+  const borrowed = bookBorrowedUser?.userName === undefined ? null
     : <p className="text-sm text-white font-bold p-1 bg-gray-500 rounded-lg text-center">
-      Borrowed by: {checkoutUser?.userName}</p>;
+      Borrowed by: {bookBorrowedUser?.userName}</p>;
 
-  const borrow = () => {
-    alert("Borrowed");
+  const borrow = async () => {
+    const requestBorrow = await requestBorrowBook(book.id);
+    if (requestBorrow.message !== 'Book borrowed') return setMsg(requestBorrow.message);
+    window.location.reload();
   };
 
   return (
@@ -45,10 +51,12 @@ function BookInfo({ book }: PropsBookInfo) {
         <button
           onClick={() => deleteBook(book.id)}
           className="button bg-red-700 text-white h-full hover:bg-red-800 mt-[-1px]">
-            Delete book
+          Delete book
         </button>
 
       </div>
+
+      <span className="text-red-600 text-sm mt-2">{msg}</span>
 
     </div>
   );
