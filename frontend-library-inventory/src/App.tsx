@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom"
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import Login from "./pages/Login"
 import Home from "./pages/Home"
 import BookPage from "./pages/BookPage"
@@ -8,11 +8,12 @@ import { useEffect } from "react"
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) return navigate('/')
-  }, [navigate])
+    if (!token && location.pathname !== '/register') return navigate('/');
+  }, [navigate, location.pathname]);
 
   return (
     <Routes>

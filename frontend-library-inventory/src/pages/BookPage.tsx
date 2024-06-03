@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import BookInfo from "../components/BookInfo"
 import NavBar from "../components/NavBar"
 import { useEffect, useState } from "react";
@@ -8,6 +8,7 @@ import BookNotFound from "../components/BookNotFound";
 
 function BookPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [book, setBook] = useState<Book | MsgBackend>({ message: '' });
 
   useEffect(() => {
@@ -20,6 +21,11 @@ function BookPage() {
       <NavBar />
       <div className="w-sreen h-14 pt-14" />
       {'message' in book ? <BookNotFound message={book.message} /> : <BookInfo book={book} />}
+      <button
+        onClick={() => navigate('/book')}
+        className="button p-1 rounded-lg bg-gray-800 text-white font-semibold">
+        Return
+      </button>
     </main>
   )
 }

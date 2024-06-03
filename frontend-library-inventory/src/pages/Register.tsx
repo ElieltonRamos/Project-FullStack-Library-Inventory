@@ -24,7 +24,7 @@ function Register() {
   return (
     <main className="w-screen h-screen bg-brown_100 flex items-center justify-center flex-col">
 
-      <h1 className="text-brown_300 font-bold text-5xl">Book Master</h1>
+      <h1 className="text-brown_300 font-bold text-5xl">Library Inventory</h1>
 
       <form
         onSubmit={handleSubmit}

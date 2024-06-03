@@ -25,7 +25,7 @@ function Login() {
     <main className="w-screen h-screen bg-brown_100 flex items-center justify-center flex-col md:flex-row">
 
       <section className="w-580 pr-8 text-center md:text-left">
-        <h1 className="text-brown_300 font-bold text-5xl">Book Master</h1>
+        <h1 className="text-brown_300 font-bold text-5xl">Library Inventory</h1>
         <h2 className="text-3xl text-brown_500">Easily manage books. Find, borrow and organize with Book Master.</h2>
       </section>
 
