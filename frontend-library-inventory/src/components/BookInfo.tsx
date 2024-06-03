@@ -8,15 +8,15 @@ type PropsBookInfo = {
 
 function BookInfo({ book }: PropsBookInfo) {
   const navigate = useNavigate();
-  const { description, CheckoutUser, status } = book;
+  const { description, checkoutUser, status } = book;
 
   const deleteBook = (id: number) => {
     navigate('/book')
   };
 
-  const borrowed = CheckoutUser?.userName === undefined ? null
+  const borrowed = checkoutUser?.userName === undefined ? null
     : <p className="text-sm text-white font-bold p-1 bg-gray-500 rounded-lg text-center">
-      Borrowed by: {CheckoutUser?.userName}</p>;
+      Borrowed by: {checkoutUser?.userName}</p>;
 
   const borrow = () => {
     alert("Borrowed");

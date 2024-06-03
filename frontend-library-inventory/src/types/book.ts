@@ -6,7 +6,7 @@ export default interface Book {
   description: string;
   image?: string;
   status: string;
-  CheckoutUser?: LoggedUser;
+  checkoutUser?: LoggedUser;
 }
 
 export type CreateBook = Omit<Book, 'id'>;
