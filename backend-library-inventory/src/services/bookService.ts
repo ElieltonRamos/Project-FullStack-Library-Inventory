@@ -40,11 +40,12 @@ class BookService {
     const bookExists = await this.bookModel.findOne('id', bookId);
     if (!bookExists) return { status: 'notFound', data: { message: this.msgBookNotFound } };
 
-    const updatedBook = {
+    const updatedBook: Book = {
       title: book.title || bookExists.title,
       description: book.description || bookExists.description,
       image: book.image || bookExists.image,
       status: book.status || bookExists.status,
+      checkoutUser: book.checkoutUser || bookExists.checkoutUser,
     };
 
     const updated = await this.bookModel.update(bookId, updatedBook);
@@ -75,7 +76,7 @@ class BookService {
     if (!bookExists) return { status: 'notFound', data: { message: this.msgBookNotFound } };
 
     const newStatus: StatusBook = 'available';
-    const updatedBook = { ...bookExists, checkoutUser: undefined, status: newStatus };
+    const updatedBook = { ...bookExists, checkoutUser: null, status: newStatus };
     const resDB = await this.bookModel.update(bookId, updatedBook);
     if (resDB === 0) return { status: 'internalError', data: { message: this.internalError } };
 

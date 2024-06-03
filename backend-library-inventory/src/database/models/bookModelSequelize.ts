@@ -16,7 +16,7 @@ InferCreationAttributes<BookModelSequelize>> {
   declare description: string;
   declare image: string;
   declare status: StatusBook;
-  declare checkoutUser: CreationOptional<number>;
+  declare checkoutUser: CreationOptional<number | null>;
 }
 
 BookModelSequelize.init({

@@ -8,7 +8,7 @@ interface Book {
   description: string;
   image: string;
   status: StatusBook;
-  checkoutUser?: number;
+  checkoutUser: number | null;
   bookBorrowedUser?: User;
 }
 
