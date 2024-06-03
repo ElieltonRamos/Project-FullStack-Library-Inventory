@@ -55,15 +55,27 @@ class BookController {
     }
   }
 
-  async updateBookStatus(req: Request, res: Response) {
+  async borrowThisBook(req: Request, res: Response) {
     try {
       const { id } = req.params;
       const { user } = req.body;
-      const { status, data } = await this.service.updateBookStatus(Number(id), Number(user.id));
+      const { status, data } = await this.service.borrowThisBook(Number(id), Number(user.id));
       return res.status(mapStatusHTTP(status)).json(data);
     } catch (error) {
       const erroMsg = error as Error;
-      console.log('Error in updateBookStatus', erroMsg.message);
+      console.log('Error in BorrowThisBook', erroMsg.message);
+      return res.status(500).json({ message: this.internalErrorMsg });
+    }
+  }
+
+  async giveBackBook(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { status, data } = await this.service.giveBackBook(Number(id));
+      return res.status(mapStatusHTTP(status)).json(data);
+    } catch (error) {
+      const erroMsg = error as Error;
+      console.log('Error in giveBackBook', erroMsg.message);
       return res.status(500).json({ message: this.internalErrorMsg });
     }
   }

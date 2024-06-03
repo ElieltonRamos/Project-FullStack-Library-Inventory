@@ -25,6 +25,16 @@ export default {
       image: {
         type: DataTypes.TEXT,
       },
+      checkoutUser: {
+        field: 'checkout_user',
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      },
     });
   },
 

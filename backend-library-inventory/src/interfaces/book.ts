@@ -1,10 +1,15 @@
+import User from './user';
+
+export type StatusBook = 'available' | 'checkout';
+
 interface Book {
   id?: number;
   title: string;
   description: string;
   image: string;
-  status: string;
-  checkoutUser?: { id: number; userName?: string; image?: string};
+  status: StatusBook;
+  checkoutUser?: number;
+  bookBorrowedUser?: User;
 }
 
 export type NewBook = Omit<Book, 'id'>;

@@ -1,4 +1,5 @@
 import BookModelSequelize from '../database/models/bookModelSequelize';
+import UserModelSequelize from '../database/models/userModelSequelize';
 import Book from '../interfaces/book';
 import databaseModel from '../interfaces/databaseModel';
 
@@ -12,7 +13,7 @@ class BookModel implements databaseModel<Book> {
 
   async findAll(): Promise<Book[]> {
     const responseDB = await this.model.findAll({
-      attributes: { exclude: ['description']},
+      attributes: { exclude: ['description', 'checkoutUser'] },
       order: [['id', 'DESC']]
     });
     const allBooks = responseDB.map((book) => book.dataValues);
@@ -20,8 +21,16 @@ class BookModel implements databaseModel<Book> {
   }
 
   async findById(id: number): Promise<Book | null> {
-    const book = await this.model.findByPk(id);
+    const book = await this.model.findByPk(id, {
+      attributes: { exclude: ['checkoutUser'] },
+      include: {
+        model: UserModelSequelize,
+        as: 'bookBorrowedUser',
+        attributes: ['id', 'userName']
+      }});
+
     if (!book) return null;
+    
     return book.dataValues;
   }
 

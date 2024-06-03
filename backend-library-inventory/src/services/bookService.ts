@@ -1,4 +1,4 @@
-import Book from '../interfaces/book';
+import Book, { StatusBook } from '../interfaces/book';
 import databaseModel from '../interfaces/databaseModel';
 import { ServiceResponse } from '../interfaces/responses';
 
@@ -53,19 +53,33 @@ class BookService {
     return { status: 'ok', data: updatedBook };
   }
 
-  async updateBookStatus(bookId: number, userId: number): ServiceResponse<Book> {
+  async borrowThisBook(bookId: number, userId: number): ServiceResponse<Book> {
     const invalid = isNaN(bookId) || !userId;
     if (invalid) return { status: 'badRequest', data: { message: this.msgInvalidId } };
 
     const bookExists = await this.bookModel.findById(bookId);
     if (!bookExists) return { status: 'notFound', data: { message: this.msgBookNotFound } };
 
-    const checkoutUser = { id: userId };
-
-    const updated = await this.bookModel.update(bookId, { ...bookExists, checkoutUser });
-    if (updated === 0) return { status: 'internalError', data: { message: this.internalError } };
+    const newStatus: StatusBook = 'checkout';
+    const updatedBook =  { ...bookExists, checkoutUser: userId, status: newStatus };
+    const resDB = await this.bookModel.update(bookId, updatedBook);
+    if (resDB === 0) return { status: 'internalError', data: { message: this.internalError } };
 
     return { status: 'ok', data: { message: 'Book borrowed' } };
+  }
+
+  async giveBackBook(bookId: number): ServiceResponse<Book> {
+    if (isNaN(bookId)) return { status: 'badRequest', data: { message: this.msgInvalidId } };
+
+    const bookExists = await this.bookModel.findById(bookId);
+    if (!bookExists) return { status: 'notFound', data: { message: this.msgBookNotFound } };
+
+    const newStatus: StatusBook = 'available';
+    const updatedBook = { ...bookExists, checkoutUser: undefined, status: newStatus };
+    const resDB = await this.bookModel.update(bookId, updatedBook);
+    if (resDB === 0) return { status: 'internalError', data: { message: this.internalError } };
+
+    return { status: 'ok', data: { message: 'Book given back' } };
   }
 
   async deleteBook(bookId: number): ServiceResponse<Book> {

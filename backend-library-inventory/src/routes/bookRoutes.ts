@@ -42,9 +42,15 @@ bookRoutes.delete(
 );
 
 bookRoutes.patch(
-  '/:id/status',
+  '/:id/borrow',
   validateToken,
-  (req: Request, res: Response) => bookController.updateBookStatus(req, res)
+  (req: Request, res: Response) => bookController.borrowThisBook(req, res)
+);
+
+bookRoutes.patch(
+  '/:id/giveback',
+  validateToken,
+  (req: Request, res: Response) => bookController.giveBackBook(req, res)
 );
 
 export default bookRoutes;
