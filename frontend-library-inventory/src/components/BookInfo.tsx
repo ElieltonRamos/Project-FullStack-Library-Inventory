@@ -19,9 +19,9 @@ function BookInfo({ book }: PropsBookInfo) {
   return (
     <div className="flex flex-col justify-center items-center p-5 bg-white w-3/4 shadow-lg rounded-md mb-5">
 
-      <Book book={book} />
+      <Book book={book} detailsView={false} />
 
-      <p className="text-sm text-gray-800">{description}</p>
+      <p className="text-sm text-gray-800 mt-5">{description}</p>
 
       <div className="flex justify-center gap-2 w-full mt-2">
 
